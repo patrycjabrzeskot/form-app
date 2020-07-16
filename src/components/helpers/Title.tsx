@@ -3,7 +3,9 @@ import React from "react";
 export default function Title(props) {
   return (
     <>
-      <p>1. Pytanie testowe</p>
+      <p style={{ color: "blue", fontWeight: "bold" }}>
+        {props.number}. {props.title}
+      </p>
     </>
   );
 }

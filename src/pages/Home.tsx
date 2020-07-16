@@ -18,8 +18,8 @@ function Home() {
             {/* <p>Odpowiedz na kilka pytań</p> */}
           </CardContent>
           <CardContent>
-            <Title />
-            <RadioQuestion value={["Female", "Male"]} />
+            <Title number={1} title="Zaznacz swoją płeć" />
+            <RadioQuestion value={["Kobieta", "Mężczyzna"]} />
           </CardContent>
         </Card>
       </Container>
