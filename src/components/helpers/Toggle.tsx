@@ -1,12 +1,12 @@
 import React from "react";
 import Switch from "@material-ui/core/Switch";
 import { TableRow, TableCell } from "@material-ui/core";
-import "../index.css";
+import "../../index.css";
 
-export default function Switches() {
+export default function Toggle() {
   const [state, setState] = React.useState({
-    checkedA: true,
-    checkedB: true,
+    checkedA: false,
+    // checkedB: true,
   });
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
