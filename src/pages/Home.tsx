@@ -1,16 +1,19 @@
 import { Container } from "@material-ui/core";
 import React from "react";
 import "./Home.css";
+import Toggle from "../components/Toggle";
 
 function Home() {
   return (
-    // <div className="Home">
-    <Container>
-      <div className="Home-header">
-        <p>Wypełnij krótką ankietę </p>
-      </div>
-    </Container>
-    // </div>
+    <>
+      <Container>
+        <Toggle />
+
+        <div className="Home-header">
+          <h3>Wypełnij krótką ankietę </h3>
+        </div>
+      </Container>
+    </>
   );
 }
 
