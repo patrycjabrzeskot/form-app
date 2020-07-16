@@ -3,8 +3,9 @@
 }
 
 .Home-header {
-  text-align: center;
+  /* text-align: center; */
   /* background-color: #282c34; */
+  padding-left: 15vh;
   background-color: white;
   min-height: 100vh;
   /* display: flex; */

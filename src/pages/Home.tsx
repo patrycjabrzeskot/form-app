@@ -1,17 +1,27 @@
-import { Container } from "@material-ui/core";
+import { Container, Card, CardContent } from "@material-ui/core";
 import React from "react";
 import "./Home.css";
-import Toggle from "../components/Toggle";
+import Toggle from "../components/helpers/Toggle";
+import Title from "../components/helpers/Title";
+
+import RadioQuestion from "components/inputs/Radio";
 
 function Home() {
   return (
     <>
-      <Container>
-        <Toggle />
+      <Toggle />
 
-        <div className="Home-header">
-          <h3>Wypełnij krótką ankietę </h3>
-        </div>
+      <Container>
+        <Card className="Home-header">
+          <CardContent>
+            <h3>Wypełnij krótką ankietę </h3>
+            {/* <p>Odpowiedz na kilka pytań</p> */}
+          </CardContent>
+          <CardContent>
+            <Title />
+            <RadioQuestion value={["Female", "Male"]} />
+          </CardContent>
+        </Card>
       </Container>
     </>
   );
