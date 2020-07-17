@@ -10,7 +10,7 @@ interface RadioProps {
   value: string[];
 }
 function RadioQuestion(props: RadioProps) {
-  const [value, setValue] = React.useState("Female");
+  const [value, setValue] = React.useState("");
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setValue((event.target as HTMLInputElement).value);
@@ -39,7 +39,6 @@ function RadioQuestion(props: RadioProps) {
                 {item}
               </Typography>
             }
-            color="white"
           />
         ))}
       </RadioGroup>
