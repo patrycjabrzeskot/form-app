@@ -15,7 +15,6 @@ function RadioQuestion(props: RadioProps) {
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setValue((event.target as HTMLInputElement).value);
   };
-  console.log(props);
   const theme = useContext(ThemeContext);
 
   const ColoredRadio = withStyles({
@@ -26,7 +25,6 @@ function RadioQuestion(props: RadioProps) {
       },
     },
     checked: {},
-    // })((props: RadioProps) => <Radio color="default" {...props} />);
   })(Radio);
 
   return (
