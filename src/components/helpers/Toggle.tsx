@@ -30,20 +30,27 @@ function Toggle() {
   })(Switch);
 
   return (
-    <div style={{ float: "right", borderBottom: "none" }}>
-      <FormGroup>
-        <FormControlLabel
-          control={
-            <ColoredSwitch
-              checked={state.checkedA}
-              onChange={handleChange}
-              name="checkedA"
+    <ThemeContext.Consumer>
+      {({ theme, toggleTheme }) => (
+        <div style={{ float: "right", borderBottom: "none" }}>
+          <FormGroup>
+            <FormControlLabel
+              control={
+                <ColoredSwitch
+                  checked={state.checkedA}
+                  onChange={function (event) {
+                    handleChange(event);
+                    toggleTheme();
+                  }}
+                  name="checkedA"
+                />
+              }
+              label="Przełącz motyw"
             />
-          }
-          label="Zmień styl"
-        />
-      </FormGroup>
-    </div>
+          </FormGroup>
+        </div>
+      )}
+    </ThemeContext.Consumer>
   );
 }
 
