@@ -4,7 +4,7 @@ import React, { useContext } from "react";
 import Title from "./helpers/Title";
 import RadioQuestion from "./inputs/Radio";
 
-const Form = () => {
+const Form: React.FC = () => {
   const theme = useContext(ThemeContext);
 
   return (

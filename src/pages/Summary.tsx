@@ -1,6 +1,6 @@
 import React from "react";
 
-function Summary() {
+const Summary: React.FC = () => {
   return (
     <div className="App">
       <header className="App-header">
@@ -18,6 +18,6 @@ function Summary() {
       </header>
     </div>
   );
-}
+};
 
 export default Summary;

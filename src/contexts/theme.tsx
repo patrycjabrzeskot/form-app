@@ -19,14 +19,3 @@ export const ThemeContext = React.createContext({
   theme: theme.light,
   toggleTheme: () => {},
 });
-
-// export const ThemeContext = React.createContext(
-//   theme.dark // wartość domyślna
-// );
-
-// const ThemeContext = React.createContext(theme.dark);
-
-// export const ThemeProvider = ThemeContext.Provider;
-// export const ThemeConsumer = ThemeContext.Consumer;
-
-// export default ThemeContext;

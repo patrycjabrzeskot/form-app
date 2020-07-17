@@ -1,7 +1,12 @@
 import React, { useContext } from "react";
 import { ThemeContext } from "../../contexts/theme";
 
-function Title(props) {
+interface TitleProps {
+  number: number;
+  title: string;
+}
+
+const Title: React.FC<TitleProps> = (props: TitleProps) => {
   const theme = useContext(ThemeContext);
   return (
     <>
@@ -10,6 +15,6 @@ function Title(props) {
       </p>
     </>
   );
-}
+};
 
 export default Title;

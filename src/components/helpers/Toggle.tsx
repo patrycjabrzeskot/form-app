@@ -4,7 +4,7 @@ import { withStyles, FormGroup, FormControlLabel } from "@material-ui/core";
 import "../../index.css";
 import { ThemeContext } from "../../contexts/theme";
 
-function Toggle() {
+const Toggle: React.FC = () => {
   const [state, setState] = React.useState({
     checkedA: false,
   });
@@ -52,6 +52,6 @@ function Toggle() {
       )}
     </ThemeContext.Consumer>
   );
-}
+};
 
 export default Toggle;
