@@ -1,42 +1,50 @@
-import React from "react";
+import React, { useContext } from "react";
 import Switch from "@material-ui/core/Switch";
-import { TableRow, TableCell } from "@material-ui/core";
+import { withStyles, FormGroup, FormControlLabel } from "@material-ui/core";
 import "../../index.css";
+import { ThemeContext } from "../../contexts/theme";
 
-export default function Toggle() {
+function Toggle() {
   const [state, setState] = React.useState({
     checkedA: false,
-    // checkedB: true,
   });
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setState({ ...state, [event.target.name]: event.target.checked });
   };
 
+  const theme = useContext(ThemeContext);
+
+  const ColoredSwitch = withStyles({
+    switchBase: {
+      color: theme.theme.elements,
+      "&$checked": {
+        color: theme.theme.elements,
+      },
+      "&$checked + $track": {
+        backgroundColor: theme.theme.elements,
+      },
+    },
+    checked: {},
+    track: {},
+  })(Switch);
+
   return (
     <div style={{ float: "right", borderBottom: "none" }}>
-      <TableRow>
-        <TableCell>
-          <p>Zmień styl</p>
-        </TableCell>
-        <TableCell align="right">
-          <Switch
-            checked={state.checkedA}
-            onChange={handleChange}
-            name="checkedA"
-            inputProps={{ "aria-label": "secondary checkbox" }}
-          />
-        </TableCell>
-      </TableRow>
-
-      {/* <Switch
-        checked={state.checkedB}
-        onChange={handleChange}
-        color="primary"
-        name="checkedB"
-        inputProps={{ "aria-label": "primary checkbox" }}
-      />
-      <Switch inputProps={{ "aria-label": "primary checkbox" }} /> */}
+      <FormGroup>
+        <FormControlLabel
+          control={
+            <ColoredSwitch
+              checked={state.checkedA}
+              onChange={handleChange}
+              name="checkedA"
+            />
+          }
+          label="Zmień styl"
+        />
+      </FormGroup>
     </div>
   );
 }
+
+export default Toggle;

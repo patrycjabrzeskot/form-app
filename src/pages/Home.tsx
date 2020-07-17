@@ -1,28 +1,26 @@
-import { Container, Card, CardContent } from "@material-ui/core";
-import React from "react";
+import React, { useState } from "react";
 import "./Home.css";
 import Toggle from "../components/helpers/Toggle";
-import Title from "../components/helpers/Title";
-
-import RadioQuestion from "components/inputs/Radio";
+import { theme, ThemeContext } from "../contexts/theme";
+import Form from "../components/Form";
 
 function Home() {
+  const [myTheme, setTheme] = useState(theme.dark);
+  const myToggleTheme = () => {
+    state.theme === theme.dark ? setTheme(theme.light) : setTheme(theme.dark);
+  };
+
+  const state = {
+    theme: myTheme,
+    toggleTheme: myToggleTheme,
+  };
+
   return (
     <>
-      <Toggle />
-
-      <Container>
-        <Card className="Home-header">
-          <CardContent>
-            <h3>Wypełnij krótką ankietę </h3>
-            {/* <p>Odpowiedz na kilka pytań</p> */}
-          </CardContent>
-          <CardContent>
-            <Title number={1} title="Zaznacz swoją płeć" />
-            <RadioQuestion value={["Kobieta", "Mężczyzna"]} />
-          </CardContent>
-        </Card>
-      </Container>
+      <ThemeContext.Provider value={state}>
+        <Toggle />
+        <Form />
+      </ThemeContext.Provider>
     </>
   );
 }
