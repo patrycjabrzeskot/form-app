@@ -1,42 +1,57 @@
-import React from "react";
+import React, { useContext } from "react";
 import Switch from "@material-ui/core/Switch";
-import { TableRow, TableCell } from "@material-ui/core";
+import { withStyles, FormGroup, FormControlLabel } from "@material-ui/core";
 import "../../index.css";
+import { ThemeContext } from "../../contexts/theme";
 
-export default function Toggle() {
+const Toggle: React.FC = () => {
   const [state, setState] = React.useState({
     checkedA: false,
-    // checkedB: true,
   });
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setState({ ...state, [event.target.name]: event.target.checked });
   };
 
-  return (
-    <div style={{ float: "right", borderBottom: "none" }}>
-      <TableRow>
-        <TableCell>
-          <p>Zmień styl</p>
-        </TableCell>
-        <TableCell align="right">
-          <Switch
-            checked={state.checkedA}
-            onChange={handleChange}
-            name="checkedA"
-            inputProps={{ "aria-label": "secondary checkbox" }}
-          />
-        </TableCell>
-      </TableRow>
+  const theme = useContext(ThemeContext);
 
-      {/* <Switch
-        checked={state.checkedB}
-        onChange={handleChange}
-        color="primary"
-        name="checkedB"
-        inputProps={{ "aria-label": "primary checkbox" }}
-      />
-      <Switch inputProps={{ "aria-label": "primary checkbox" }} /> */}
-    </div>
+  const ColoredSwitch = withStyles({
+    switchBase: {
+      color: theme.theme.elements,
+      "&$checked": {
+        color: theme.theme.elements,
+      },
+      "&$checked + $track": {
+        backgroundColor: theme.theme.elements,
+      },
+    },
+    checked: {},
+    track: {},
+  })(Switch);
+
+  return (
+    <ThemeContext.Consumer>
+      {({ theme, toggleTheme }) => (
+        <div style={{ float: "right", borderBottom: "none" }}>
+          <FormGroup>
+            <FormControlLabel
+              control={
+                <ColoredSwitch
+                  checked={state.checkedA}
+                  onChange={function (event) {
+                    handleChange(event);
+                    toggleTheme();
+                  }}
+                  name="checkedA"
+                />
+              }
+              label="Przełącz motyw"
+            />
+          </FormGroup>
+        </div>
+      )}
+    </ThemeContext.Consumer>
   );
-}
+};
+
+export default Toggle;
