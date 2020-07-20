@@ -8,13 +8,10 @@ import { ThemeContext } from "contexts/theme";
 
 interface RadioProps {
   options: string[];
+  name: string;
+  handleChange: (change: string) => void;
 }
 function RadioQuestion(props: RadioProps) {
-  const [value, setValue] = React.useState("");
-
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setValue((event.target as HTMLInputElement).value);
-  };
   const theme = useContext(ThemeContext);
 
   const ColoredRadio = withStyles({
@@ -29,10 +26,11 @@ function RadioQuestion(props: RadioProps) {
 
   return (
     <FormControl component="fieldset">
-      <RadioGroup value={value} onChange={handleChange}>
+      <RadioGroup onChange={(event) => props.handleChange(event.target.value)}>
         {props.options.map((item) => (
           <FormControlLabel
             value={item}
+            name={props.name}
             control={<ColoredRadio />}
             label={
               <Typography style={{ color: theme.theme.text }}>
