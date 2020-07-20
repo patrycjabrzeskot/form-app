@@ -7,16 +7,16 @@ import RadioQuestion from "../components/inputs/Radio";
 import TextFieldQuestion from "../components/inputs/TextField";
 
 const initialState = {
-  gender: "", //
-  age: "", //
-  isInterested: "", //
+  gender: "",
+  age: "",
+  isInterested: "",
   whichSport: [""],
-  howOften: "", //
-  howLong: "", //
+  howOften: "",
+  howLong: "",
   places: [""],
   mostImportant: [""],
-  injury: "", //
-  competition: "", //
+  injury: "",
+  competition: "",
 };
 
 const formActionTypes = {
@@ -73,14 +73,28 @@ function formReducer(prevState = initialState, action) {
         howLong: action.payload,
       };
     case formActionTypes.updatePlaces:
+      var updatedPlaces = [...prevState.places];
+      if (updatedPlaces.includes(action.payload)) {
+        var index = prevState.places.indexOf(action.payload);
+        updatedPlaces.splice(index, 1);
+      } else {
+        updatedPlaces.push(action.payload);
+      }
       return {
         ...prevState,
-        places: action.payload,
+        places: updatedPlaces,
       };
     case formActionTypes.updateMostImportant:
+      var updatedMostImportant = [...prevState.mostImportant];
+      if (updatedMostImportant.includes(action.payload)) {
+        var index = prevState.mostImportant.indexOf(action.payload);
+        updatedMostImportant.splice(index, 1);
+      } else {
+        updatedMostImportant.push(action.payload);
+      }
       return {
         ...prevState,
-        mostImportant: action.payload,
+        mostImportant: updatedMostImportant,
       };
     case formActionTypes.updateInjury:
       return {
@@ -182,7 +196,6 @@ const FormContainer: React.FC = () => {
                 "pływanie",
                 "łyżwiarstwo",
                 "taniec",
-                "inne: jakie? ",
               ]}
               name="whichSport"
               value={whichSport}
@@ -228,19 +241,27 @@ const FormContainer: React.FC = () => {
             />
 
             <Title number={7} title="Gdzie najbardziej lubisz ćwiczyć?" />
-            {/* <CheckBoxQuestion
+            <CheckBoxQuestion
               options={[
                 "na świeżym powietrzu",
                 "na siłowni",
                 "w domu",
                 "jest to mi obojętne",
               ]}
-            /> */}
+              name="places"
+              value={places}
+              handleChange={(newPlace: string) => {
+                dispach({
+                  type: formActionTypes.updatePlaces,
+                  payload: newPlace,
+                });
+              }}
+            />
             <Title
               number={8}
               title="Które aspekty uprawiania sportu są dla Ciebie najważniejsze?"
             />
-            {/* <CheckBoxQuestion
+            <CheckBoxQuestion
               options={[
                 "możliwość zrzucenia wagi",
                 "możliwość wyrzeźbienia sylwetki",
@@ -250,13 +271,21 @@ const FormContainer: React.FC = () => {
                 "sposób na relaks",
                 "możliwość poznania nowych ludzi",
               ]}
-            /> */}
+              name="mostImportant"
+              value={mostImportant}
+              handleChange={(newImportant: string) => {
+                dispach({
+                  type: formActionTypes.updateMostImportant,
+                  payload: newImportant,
+                });
+              }}
+            />
             <Title
               number={9}
               title="Czy kiedykolwiek miałeś/aś kontuzję z powodu uprawiania sportu?"
             />
             <RadioQuestion
-              options={["Nie", "Tak. Jaką?"]}
+              options={["Tak", "Nie"]}
               name="injury"
               handleChange={(injury: string) =>
                 dispach({
