@@ -1,35 +1,3 @@
-// import React, { useContext } from "react";
-// import { withStyles } from "@material-ui/core/styles";
-// import FormGroup from "@material-ui/core/FormGroup";
-// import FormControlLabel from "@material-ui/core/FormControlLabel";
-// import { ThemeContext } from "contexts/theme";
-// import { TextField, Typography } from "@material-ui/core";
-
-// function TextFieldQuestion(props) {
-//   const theme = useContext(ThemeContext);
-
-//   const ColoredTextField = withStyles({
-//     // root: {
-//     //   color: "white",
-//     // },
-//     // input: {
-//     //   color: "white",
-//     // },
-//   })(TextField);
-
-//   return (
-//     <ColoredTextField
-//       type="number"
-//       //   className={classes.root}
-//       InputProps={{
-//         className: theme.theme.text,
-//       }}
-//     />
-//   );
-// }
-
-// export default TextFieldQuestion;
-
 import React, { useContext } from "react";
 import {
   createStyles,
@@ -59,9 +27,6 @@ const TextFieldQuestion: React.FC = () => {
 
   const ColoredTextField = withStyles({
     root: {
-      // "& label.Mui-focused": {
-      //   color: theme.theme.text,
-      // },
       "&.MuiInputBase-input": {
         color: "white",
       },
