@@ -1,6 +1,11 @@
 import React, { useContext } from "react";
 import Switch from "@material-ui/core/Switch";
-import { withStyles, FormGroup, FormControlLabel } from "@material-ui/core";
+import {
+  withStyles,
+  FormGroup,
+  FormControlLabel,
+  Typography,
+} from "@material-ui/core";
 import "../../index.css";
 import { ThemeContext } from "../../contexts/theme";
 
@@ -45,7 +50,12 @@ const Toggle: React.FC = () => {
                   name="checkedA"
                 />
               }
-              label="Przełącz motyw"
+              // label="Przełącz motyw"
+              label={
+                <Typography style={{ color: theme.text }}>
+                  Przełącz motyw
+                </Typography>
+              }
             />
           </FormGroup>
         </div>

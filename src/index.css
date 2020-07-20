@@ -15,3 +15,7 @@ code {
 .MuiTableCell-root {
   border-bottom: none !important;
 }
+
+html {
+  background-color: #a1a1a1;
+}

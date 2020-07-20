@@ -10,12 +10,11 @@ interface RadioProps {
   value: string[];
 }
 function RadioQuestion(props: RadioProps) {
-  const [value, setValue] = React.useState("Female");
+  const [value, setValue] = React.useState("");
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setValue((event.target as HTMLInputElement).value);
   };
-  console.log(props);
   const theme = useContext(ThemeContext);
 
   const ColoredRadio = withStyles({
@@ -26,7 +25,6 @@ function RadioQuestion(props: RadioProps) {
       },
     },
     checked: {},
-    // })((props: RadioProps) => <Radio color="default" {...props} />);
   })(Radio);
 
   return (
@@ -41,7 +39,6 @@ function RadioQuestion(props: RadioProps) {
                 {item}
               </Typography>
             }
-            color="white"
           />
         ))}
       </RadioGroup>
