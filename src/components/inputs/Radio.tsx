@@ -29,6 +29,7 @@ function RadioQuestion(props: RadioProps) {
       <RadioGroup onChange={(event) => props.handleChange(event.target.value)}>
         {props.options.map((item) => (
           <FormControlLabel
+            key={item}
             value={item}
             name={props.name}
             control={<ColoredRadio />}

@@ -51,9 +51,16 @@ function formReducer(prevState = initialState, action) {
         isInterested: action.payload,
       };
     case formActionTypes.updateWhichSport:
+      var updatedSports = [...prevState.whichSport];
+      if (updatedSports.includes(action.payload)) {
+        var index = prevState.whichSport.indexOf(action.payload);
+        updatedSports.splice(index, 1);
+      } else {
+        updatedSports.push(action.payload);
+      }
       return {
         ...prevState,
-        whichSport: action.payload,
+        whichSport: updatedSports,
       };
     case formActionTypes.updateHowOften:
       return {
@@ -92,7 +99,21 @@ function formReducer(prevState = initialState, action) {
 }
 const FormContainer: React.FC = () => {
   const theme = useContext(ThemeContext);
-  const [{ gender, age }, dispach] = useReducer(formReducer, initialState);
+  const [
+    {
+      gender,
+      age,
+      isInterested,
+      whichSport,
+      howOften,
+      howLong,
+      places,
+      mostImportant,
+      injury,
+      competition,
+    },
+    dispach,
+  ] = useReducer(formReducer, initialState);
 
   return (
     <Container>
@@ -163,6 +184,14 @@ const FormContainer: React.FC = () => {
                 "taniec",
                 "inne: jakie? ",
               ]}
+              name="whichSport"
+              value={whichSport}
+              handleChange={(newSport: string) => {
+                dispach({
+                  type: formActionTypes.updateWhichSport,
+                  payload: newSport,
+                });
+              }}
             />
             <Title number={5} title="Jak często uprawiasz sport?" />
             <RadioQuestion
@@ -199,19 +228,19 @@ const FormContainer: React.FC = () => {
             />
 
             <Title number={7} title="Gdzie najbardziej lubisz ćwiczyć?" />
-            <CheckBoxQuestion
+            {/* <CheckBoxQuestion
               options={[
                 "na świeżym powietrzu",
                 "na siłowni",
                 "w domu",
                 "jest to mi obojętne",
               ]}
-            />
+            /> */}
             <Title
               number={8}
               title="Które aspekty uprawiania sportu są dla Ciebie najważniejsze?"
             />
-            <CheckBoxQuestion
+            {/* <CheckBoxQuestion
               options={[
                 "możliwość zrzucenia wagi",
                 "możliwość wyrzeźbienia sylwetki",
@@ -221,7 +250,7 @@ const FormContainer: React.FC = () => {
                 "sposób na relaks",
                 "możliwość poznania nowych ludzi",
               ]}
-            />
+            /> */}
             <Title
               number={9}
               title="Czy kiedykolwiek miałeś/aś kontuzję z powodu uprawiania sportu?"
