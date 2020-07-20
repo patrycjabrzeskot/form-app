@@ -1,13 +1,49 @@
 import { Card, CardContent, Container } from "@material-ui/core";
 import { ThemeContext } from "contexts/theme";
-import React, { useContext } from "react";
-import Title from "./helpers/Title";
-import CheckBoxQuestion from "./inputs/CheckBox";
-import RadioQuestion from "./inputs/Radio";
-import TextFieldQuestion from "./inputs/TextField";
+import React, { useContext, useReducer } from "react";
+import Title from "../components/helpers/Title";
+import CheckBoxQuestion from "../components/inputs/CheckBox";
+import RadioQuestion from "../components/inputs/Radio";
+import TextFieldQuestion from "../components/inputs/TextField";
 
-const Form: React.FC = () => {
+const initialState = {
+  gender: "",
+  age: "",
+};
+
+const formActionTypes = {
+  updateGender: "UPDATE_GENDER",
+  updateAge: "UPDATE_AGE",
+  resetForm: "RESET_FORM",
+};
+
+function formReducer(prevState = initialState, action) {
+  switch (action.type) {
+    case formActionTypes.updateGender:
+      console.log("reducer" + action.payload);
+      return {
+        ...prevState,
+        name: action.payload,
+      };
+    case formActionTypes.updateAge:
+      console.log("reducer" + action.payload);
+      console.log(prevState);
+      return {
+        ...prevState,
+        age: action.payload,
+      };
+    case formActionTypes.resetForm:
+      return {
+        ...prevState,
+        ...initialState,
+      };
+    default:
+      return prevState;
+  }
+}
+const FormContainer: React.FC = () => {
   const theme = useContext(ThemeContext);
+  const [{ gender, age }, dispach] = useReducer(formReducer, initialState);
 
   return (
     <Container>
@@ -19,32 +55,34 @@ const Form: React.FC = () => {
           <h3 style={{ color: theme.theme.text }}>Wypełnij krótką ankietę </h3>
           <form noValidate autoComplete="off">
             <Title number={1} title="Zaznacz swoją płeć" />
-            <RadioQuestion value={["Kobieta", "Mężczyzna"]} />
+            <RadioQuestion options={["Kobieta", "Mężczyzna"]} />
             <Title number={2} title="Ile masz lat?" />
             <TextFieldQuestion
-            // id="standard-number"
-            // label="Number"
-            // type="number"
-            // InputLabelProps={{
-            //   shrink: true,
-            // }}
+              type="number"
+              name="age"
+              value={age}
+              handleChange={(age: string) =>
+                dispach({
+                  type: formActionTypes.updateAge,
+                  payload: age,
+                })
+              }
             />
             <Title number={3} title="Czy interesujesz się sportem?" />
             <RadioQuestion
-              value={[
+              options={[
                 "Nie",
                 "Tak, uprawiam sport",
                 "Tak, jestem kibicem",
                 "Tak, kibicuję i uprawiam sport",
               ]}
             />
-
             <Title
               number={4}
               title="Które z wymienionych sportów uprawiasz najczęściej?"
             />
             <CheckBoxQuestion
-              value={[
+              options={[
                 "piłka nożna",
                 "bieganie",
                 "siatkówka",
@@ -62,7 +100,7 @@ const Form: React.FC = () => {
             />
             <Title number={5} title="Jak często uprawiasz sport?" />
             <RadioQuestion
-              value={[
+              options={[
                 "1 raz w miesiącu",
                 "2 razy w miesiącu",
                 "Raz w tygodniu",
@@ -72,7 +110,7 @@ const Form: React.FC = () => {
             />
             <Title number={6} title="Ile średnio trwa Twój jeden trening?" />
             <RadioQuestion
-              value={[
+              options={[
                 "Mniej niż 30 minut",
                 "Mniej niż godzinę",
                 "Więcej niż godzinę",
@@ -82,20 +120,19 @@ const Form: React.FC = () => {
 
             <Title number={7} title="Gdzie najbardziej lubisz ćwiczyć?" />
             <CheckBoxQuestion
-              value={[
+              options={[
                 "na świeżym powietrzu",
                 "na siłowni",
                 "w domu",
                 "jest to mi obojętne",
               ]}
             />
-
             <Title
               number={8}
               title="Które aspekty uprawiania sportu są dla Ciebie najważniejsze?"
             />
             <CheckBoxQuestion
-              value={[
+              options={[
                 "możliwość zrzucenia wagi",
                 "możliwość wyrzeźbienia sylwetki",
                 "zachowanie zdrowia",
@@ -109,12 +146,12 @@ const Form: React.FC = () => {
               number={9}
               title="Czy kiedykolwiek miałeś/aś kontuzję z powodu uprawiania sportu?"
             />
-            <RadioQuestion value={["Nie", "Tak. Jaką?"]} />
+            <RadioQuestion options={["Nie", "Tak. Jaką?"]} />
             <Title
               number={10}
               title="Czy kiedykolwiek brałeś udział w zawodach sportowych?"
             />
-            <RadioQuestion value={["Tak", "Nie"]} />
+            <RadioQuestion options={["Tak", "Nie"]} />
           </form>
         </CardContent>
       </Card>
@@ -122,4 +159,4 @@ const Form: React.FC = () => {
   );
 };
 
-export default Form;
+export default FormContainer;

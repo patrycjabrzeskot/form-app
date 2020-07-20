@@ -7,7 +7,7 @@ import { ThemeContext } from "contexts/theme";
 import { Typography } from "@material-ui/core";
 
 interface CheckBoxProps {
-  value: string[];
+  options: string[];
 }
 
 const CheckBoxQuestion: React.FC<CheckBoxProps> = (props: CheckBoxProps) => {
@@ -33,7 +33,7 @@ const CheckBoxQuestion: React.FC<CheckBoxProps> = (props: CheckBoxProps) => {
 
   return (
     <FormGroup row>
-      {props.value.map((item) => (
+      {props.options.map((item) => (
         <FormControlLabel
           style={{ width: "24%" }}
           control={

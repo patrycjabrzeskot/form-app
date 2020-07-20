@@ -1,13 +1,13 @@
 import React from "react";
 import "./Home.css";
 import Toggle from "../components/helpers/Toggle";
-import Form from "../components/Form";
+import FormContainer from "../containers/FormContainer";
 
 const Home: React.FC = () => {
   return (
     <>
       <Toggle />
-      <Form />
+      <FormContainer />
     </>
   );
 };

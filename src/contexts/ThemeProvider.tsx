@@ -12,8 +12,6 @@ const ThemeProvider: React.FC = ({ children }) => {
     toggleTheme: myToggleTheme,
   };
 
-  console.log("children");
-  console.log(children);
   return (
     <ThemeContext.Provider value={state}>{children}</ThemeContext.Provider>
   );

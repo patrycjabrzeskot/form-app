@@ -7,7 +7,7 @@ import { Typography, withStyles } from "@material-ui/core";
 import { ThemeContext } from "contexts/theme";
 
 interface RadioProps {
-  value: string[];
+  options: string[];
 }
 function RadioQuestion(props: RadioProps) {
   const [value, setValue] = React.useState("");
@@ -30,7 +30,7 @@ function RadioQuestion(props: RadioProps) {
   return (
     <FormControl component="fieldset">
       <RadioGroup value={value} onChange={handleChange}>
-        {props.value.map((item) => (
+        {props.options.map((item) => (
           <FormControlLabel
             value={item}
             control={<ColoredRadio />}
