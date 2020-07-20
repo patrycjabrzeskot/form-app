@@ -41,25 +41,29 @@ import {
 import TextField from "@material-ui/core/TextField";
 import { ThemeContext } from "contexts/theme";
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    root: {
-      display: "flex",
-      flexWrap: "wrap",
-    },
-    margin: {
-      margin: theme.spacing(1),
-    },
-  })
-);
-
 const TextFieldQuestion: React.FC = () => {
   const theme = useContext(ThemeContext);
 
+  const useStyles = makeStyles((themes: Theme) =>
+    createStyles({
+      root: {
+        display: "flex",
+        flexWrap: "wrap",
+      },
+      input: { color: theme.theme.text },
+      margin: {
+        margin: themes.spacing(1),
+      },
+    })
+  );
+
   const ColoredTextField = withStyles({
     root: {
-      "& label.Mui-focused": {
-        color: theme.theme.elements,
+      // "& label.Mui-focused": {
+      //   color: theme.theme.text,
+      // },
+      "&.MuiInputBase-input": {
+        color: "white",
       },
       "& .MuiInput-underline:after": {
         borderBottomColor: theme.theme.elements,
@@ -75,9 +79,11 @@ const TextFieldQuestion: React.FC = () => {
           borderColor: theme.theme.elements,
         },
       },
-      //   input: {
-      //     color: "white",
-      //   },
+      input: {
+        "&.MuiInputBase-input": {
+          color: theme.theme.text,
+        },
+      },
     },
   })(TextField);
 
@@ -88,7 +94,9 @@ const TextFieldQuestion: React.FC = () => {
       <ColoredTextField
         className={classes.margin}
         id="custom-css-standard-input"
-        inputProps={{ color: "white" }}
+        inputProps={{
+          className: classes.input,
+        }}
         type="number"
       />
     </form>

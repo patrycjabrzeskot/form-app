@@ -89,19 +89,21 @@ const Form: React.FC = () => {
                 "jest to mi obojętne",
               ]}
             />
-            <Title number={5} title="Jak często uprawiasz sport?" />
-            <RadioQuestion
-              value={[
-                "1 raz w miesiącu",
-                "2 razy w miesiącu",
-                "Raz w tygodniu",
-                "Kilka razy w tygodniu",
-                "Codziennie",
-              ]}
-            />
+
             <Title
               number={8}
-              title="Jak ważne są dla Ciebie poszczególne aspekty uprawiania sportu?"
+              title="Które aspekty uprawiania sportu są dla Ciebie najważniejsze?"
+            />
+            <CheckBoxQuestion
+              value={[
+                "możliwość zrzucenia wagi",
+                "możliwość wyrzeźbienia sylwetki",
+                "zachowanie zdrowia",
+                "poprawa kondycji",
+                "sposób na spędzenie wolnego czasu",
+                "sposób na relaks",
+                "możliwość poznania nowych ludzi",
+              ]}
             />
             <Title
               number={9}
