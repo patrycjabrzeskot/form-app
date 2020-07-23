@@ -1,6 +1,6 @@
 import { Card, CardContent, Container } from "@material-ui/core";
 import { ThemeContext } from "contexts/theme";
-import React, { useContext, useReducer, useState } from "react";
+import React, { useContext, useReducer } from "react";
 import Title from "../components/helpers/Title";
 import CheckBoxQuestion from "../components/inputs/CheckBox";
 import RadioQuestion from "../components/inputs/Radio";
@@ -8,6 +8,7 @@ import TextFieldQuestion from "../components/inputs/TextField";
 import StyledButton from "../components/inputs/StyledButton";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
+import { useHistory } from "react-router-dom";
 
 const initialState = {
   gender: "",
@@ -114,8 +115,9 @@ function formReducer(prevState = initialState, action) {
       return prevState;
   }
 }
-const FormContainer: React.FC = () => {
+const FormContainer: React.FC = (props) => {
   const theme = useContext(ThemeContext);
+  let history = useHistory();
 
   const [
     {
@@ -135,7 +137,7 @@ const FormContainer: React.FC = () => {
 
   const FormSchema = Yup.object().shape({
     gender: Yup.string().required("To pole jest wymagane"),
-    age: Yup.string().required("To pole jest wymagane"),
+    age: Yup.string().required("To pole jest wymagane. Wpisz liczbę"),
     isInterested: Yup.string().required("To pole jest wymagane"),
     whichSport: Yup.array()
       .required("To pole jest wymagane")
@@ -177,6 +179,8 @@ const FormContainer: React.FC = () => {
             validationSchema={FormSchema}
             onSubmit={(values) => {
               console.log(values);
+              console.log(props);
+              history.push("/summary");
             }}
           >
             {({ errors, touched }) => (
