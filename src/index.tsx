@@ -1,12 +1,13 @@
 import ThemeProvider from "contexts/ThemeProvider";
 import React from "react";
 import ReactDOM from "react-dom";
-import Home from "./pages/Home";
+//import Home from "./pages/Home";
+import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 
 ReactDOM.render(
   <ThemeProvider>
-    <Home />
+    <App />
   </ThemeProvider>,
   document.getElementById("root")
 );
