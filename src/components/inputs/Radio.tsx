@@ -7,14 +7,11 @@ import { Typography, withStyles } from "@material-ui/core";
 import { ThemeContext } from "contexts/theme";
 
 interface RadioProps {
-  value: string[];
+  options: string[];
+  name: string;
+  handleChange: (change: string) => void;
 }
 function RadioQuestion(props: RadioProps) {
-  const [value, setValue] = React.useState("");
-
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setValue((event.target as HTMLInputElement).value);
-  };
   const theme = useContext(ThemeContext);
 
   const ColoredRadio = withStyles({
@@ -29,10 +26,12 @@ function RadioQuestion(props: RadioProps) {
 
   return (
     <FormControl component="fieldset">
-      <RadioGroup value={value} onChange={handleChange}>
-        {props.value.map((item) => (
+      <RadioGroup onChange={(event) => props.handleChange(event.target.value)}>
+        {props.options.map((item) => (
           <FormControlLabel
+            key={item}
             value={item}
+            name={props.name}
             control={<ColoredRadio />}
             label={
               <Typography style={{ color: theme.theme.text }}>

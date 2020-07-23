@@ -9,7 +9,13 @@ import {
 import TextField from "@material-ui/core/TextField";
 import { ThemeContext } from "contexts/theme";
 
-const TextFieldQuestion: React.FC = () => {
+interface TextFieldProps {
+  type: string;
+  name: string;
+  handleChange: (age: string) => void;
+  value: string;
+}
+const TextFieldQuestion: React.FC<TextFieldProps> = (props: TextFieldProps) => {
   const theme = useContext(ThemeContext);
 
   const useStyles = makeStyles((themes: Theme) =>
@@ -27,9 +33,6 @@ const TextFieldQuestion: React.FC = () => {
 
   const ColoredTextField = withStyles({
     root: {
-      "&.MuiInputBase-input": {
-        color: "white",
-      },
       "& .MuiInput-underline:after": {
         borderBottomColor: theme.theme.elements,
       },
@@ -57,12 +60,15 @@ const TextFieldQuestion: React.FC = () => {
   return (
     <form className={classes.root} noValidate>
       <ColoredTextField
-        className={classes.margin}
-        id="custom-css-standard-input"
         inputProps={{
           className: classes.input,
         }}
-        type="number"
+        className={classes.margin}
+        id={props.name}
+        name={props.name}
+        type={props.type}
+        value={props.value}
+        onChange={(event) => props.handleChange(event.target.value)}
       />
     </form>
   );

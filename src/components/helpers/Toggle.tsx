@@ -37,7 +37,7 @@ const Toggle: React.FC = () => {
   return (
     <ThemeContext.Consumer>
       {({ theme, toggleTheme }) => (
-        <div style={{ float: "right", borderBottom: "none" }}>
+        <div style={{ float: "right", borderBottom: "none", marginLeft: 7 }}>
           <FormGroup>
             <FormControlLabel
               control={

@@ -7,6 +7,9 @@ import { ThemeContext } from "contexts/theme";
 import { Typography } from "@material-ui/core";
 
 interface CheckBoxProps {
+  options: string[];
+  name: string;
+  handleChange: (change: string) => void;
   value: string[];
 }
 
@@ -22,25 +25,17 @@ const CheckBoxQuestion: React.FC<CheckBoxProps> = (props: CheckBoxProps) => {
     checked: {},
   })((props: CheckboxProps) => <Checkbox color="default" {...props} />);
 
-  const [state, setState] = React.useState({
-    checkedA: false,
-  });
-
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(event.target.name);
-    setState({ ...state, [event.target.name]: event.target.checked });
-  };
-
   return (
     <FormGroup row>
-      {props.value.map((item) => (
+      {props.options.map((item) => (
         <FormControlLabel
+          key={item}
           style={{ width: "24%" }}
           control={
             <StyledCheckbox
-              checked={state.checkedA}
-              onChange={handleChange}
-              name={"checked" + item}
+              onChange={(event) => props.handleChange(item)}
+              name={props.name + item}
+              checked={props.value.includes(item)}
             />
           }
           label={
