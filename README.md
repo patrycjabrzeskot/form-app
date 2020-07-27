@@ -30,7 +30,7 @@ To run this project, install it locally using npm:
 $ git clone https://github.com/patrycjabrzeskot/form-app
 
 # Go into the repository
-$ cd language-teacher-site
+$ cd form-app
 
 # Install dependencies
 $ npm install
