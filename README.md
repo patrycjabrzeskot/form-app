@@ -1,6 +1,6 @@
 <h1 align="center">
  Example of react form used for survey about sport / activity.
-  <work in progress>
+  work in progress
 
 </h1>
 
